@@ -1,3 +1,5 @@
 name: main-app-eu-west-2-vpc
 runtime: nodejs
 description: Main app eu west 2 VPC
+config:
+  aws:region: eu-west-2

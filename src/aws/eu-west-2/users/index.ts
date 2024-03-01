@@ -4,6 +4,8 @@ import * as pulumi from "@pulumi/pulumi";
 const config = new pulumi.Config();
 const environment = config.require("environment");
 
+const pgpPublicKey = config.require("pgppublickey");
+
 const adminUserGroup = new aws.LocalAdminUserGroup({ environment });
 const adminUserGroupName = adminUserGroup.group.name.apply((name) => name);
 
@@ -12,6 +14,7 @@ const users = [
 		firstName: "simon",
 		surname: "norman",
 		userGroupNames: [adminUserGroupName],
+		pgpKey: pgpPublicKey,
 	},
 ];
 
