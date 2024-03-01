@@ -1,0 +1,4 @@
+name: 'development'
+config:
+  environment: "development"
+  region: "eu-west-2"
