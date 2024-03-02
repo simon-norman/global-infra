@@ -11,3 +11,5 @@ const vpc = new aws.Vpc({ region: awsRegion, name: "main-app", environment });
 
 export const vpcId = vpc.vpc.vpcId;
 export const urn = vpc.vpc.urn;
+export const publicSubnetIds = vpc.vpc.publicSubnetIds;
+export const privateSubnetIds = vpc.vpc.privateSubnetIds;
