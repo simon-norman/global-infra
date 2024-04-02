@@ -1,0 +1,5 @@
+name: main-app-eu-west-2-https-certificate
+runtime: nodejs
+description: Main app eu west 2 https certificate
+config:
+  aws:region: eu-west-2

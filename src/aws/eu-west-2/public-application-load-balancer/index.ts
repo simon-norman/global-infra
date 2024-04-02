@@ -20,6 +20,12 @@ const securityGroup = securityGroupsRef.getOutput(
 	"inboundPublicTlsOutboundAll",
 );
 
+const httpsCertificateRef = new pulumi.StackReference(
+	`simon-norman/main-app-eu-west-2-https-certificate/${environment}`,
+);
+
+const certificateArn = httpsCertificateRef.getOutput("arn");
+
 const publicLoadBalancer = new aws.ApplicationLoadBalancer({
 	region: awsRegion,
 	name: "main",
@@ -27,8 +33,11 @@ const publicLoadBalancer = new aws.ApplicationLoadBalancer({
 	subnetIds: publicSubnetIds,
 	securityGroup: securityGroup.apply((group) => group.id),
 	isInternal: false,
+	httpsCertificateArn: certificateArn,
 });
 
 export const arn = publicLoadBalancer.loadBalancer.loadBalancer.arn;
 export const urn = publicLoadBalancer.loadBalancer.loadBalancer.urn;
 export const id = publicLoadBalancer.loadBalancer.loadBalancer.id;
+export const listenerArn = publicLoadBalancer.listener.arn;
+export const dnsName = publicLoadBalancer.loadBalancer.loadBalancer.dnsName;

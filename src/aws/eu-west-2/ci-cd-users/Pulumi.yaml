@@ -1,0 +1,6 @@
+name: main-app-eu-west-2-ci-cd-users
+runtime: nodejs
+description: Main app eu west 2 ci cd users
+config:
+  aws:region: eu-west-2
+  pgppublickey: keybase:simonvolteras

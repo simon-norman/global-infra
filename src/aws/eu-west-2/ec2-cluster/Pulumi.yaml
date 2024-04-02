@@ -1,0 +1,5 @@
+name: main-app-eu-west-2-ec2-cluster
+runtime: nodejs
+description: Main app eu west 2 ec2 cluster
+config:
+  aws:region: eu-west-2

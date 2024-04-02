@@ -21,6 +21,15 @@ const inboundPublicTlsOutbound =
 		vpcId,
 	});
 
+const inboundFromAlbSecurityGroupOutboundAll =
+	new aws.SecurityGroupInboundPrivateOutboundAll({
+		region: awsRegion,
+		name: "main-app-inbound-alb-outbound-all",
+		environment,
+		vpcId,
+		sourceSecurityGroupId: inboundPublicTlsOutbound.securityGroup.id,
+	});
+
 type Group = typeof inboundPublicTlsOutbound.securityGroup;
 
 const getGroupOutputs = (group: Group) => {
@@ -33,4 +42,8 @@ const getGroupOutputs = (group: Group) => {
 
 export const inboundPublicTlsOutboundAll = getGroupOutputs(
 	inboundPublicTlsOutbound.securityGroup,
+);
+
+export const inboundAlbSecurityGroupOutboundAll = getGroupOutputs(
+	inboundFromAlbSecurityGroupOutboundAll.securityGroup,
 );
