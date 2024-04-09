@@ -10,7 +10,7 @@ const ciUserGroupName = ciUsers.group.name.apply((name) => name);
 
 const users = [
 	{
-		firstName: "ci-cd",
+		firstName: "internal-ci-cd",
 		surname: "user",
 		userGroupNames: [ciUserGroupName],
 		pgpKey: pgpPublicKey,

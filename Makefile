@@ -21,7 +21,7 @@ aws_all_infra_down:
 
 
 https_certificate_up:
-	@cd ./src/aws/eu-west-2/https-certificates && $(DOPPLER_CMD) pulumi up -s $(STACK)
+	@cd ./src/aws/eu-west-2/https-certificates && $(DOPPLER_CMD) pulumi up -r -f -s $(STACK)
 .PHONY: https_certificate_up
 
 https_certificate_down:
@@ -29,7 +29,7 @@ https_certificate_down:
 .PHONY: https_certificate_down
 
 environment_zones_up:
-	@cd ./src/aws/eu-west-2/environment-hosted-zones && $(DOPPLER_CMD) pulumi up -s $(STACK)
+	@cd ./src/aws/eu-west-2/environment-hosted-zones && $(DOPPLER_CMD) pulumi up -r -f -s $(STACK)
 .PHONY: environment_zones_up
 
 environment_zones_down:
@@ -45,7 +45,7 @@ master_zone_down:
 .PHONY: master_zone_down
 
 public_alb_up:
-	@cd ./src/aws/eu-west-2/public-application-load-balancer && $(DOPPLER_CMD) pulumi up -s $(STACK)
+	@cd ./src/aws/eu-west-2/public-application-load-balancer && $(DOPPLER_CMD) pulumi up -r -f -s $(STACK)
 .PHONY: public_alb_up
 
 public_alb_down:
@@ -69,7 +69,7 @@ users_down:
 .PHONY: users_down
 
 vpc_up:
-	@cd ./src/aws/eu-west-2/vpc && $(DOPPLER_CMD) pulumi up -s $(STACK)
+	@cd ./src/aws/eu-west-2/vpc && $(DOPPLER_CMD) pulumi up -f -s $(STACK)
 .PHONY: vpc_up
 
 vpc_down:
@@ -77,7 +77,7 @@ vpc_down:
 .PHONY: vpc_down
 
 security_groups_up:
-	@cd ./src/aws/eu-west-2/security-groups && $(DOPPLER_CMD) pulumi up -s $(STACK)
+	@cd ./src/aws/eu-west-2/security-groups && $(DOPPLER_CMD) pulumi up -r -f -s $(STACK)
 .PHONY: security_groups_up
 
 security_groups_down:
@@ -85,7 +85,7 @@ security_groups_down:
 .PHONY: security_groups_down
 
 ec2_cluster_up:
-	@cd ./src/aws/eu-west-2/ec2-cluster && $(DOPPLER_CMD) pulumi up -s $(STACK)
+	@cd ./src/aws/eu-west-2/ec2-cluster && $(DOPPLER_CMD) pulumi up -r -f -s $(STACK)
 .PHONY: ec2_cluster_up
 
 ec2_cluster_down:
