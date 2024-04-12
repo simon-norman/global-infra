@@ -2,10 +2,10 @@ DOPPLER_CMD := doppler run --
 
 
 aws_all_infra_up:
-	@$(MAKE) vpc_up STACK=$(STACK)
-	@$(MAKE) security_groups_up STACK=$(STACK)
 	@$(MAKE) environment_zones_up STACK=$(STACK)
 	@$(MAKE) https_certificate_up STACK=$(STACK)
+	@$(MAKE) vpc_up STACK=$(STACK)
+	@$(MAKE) security_groups_up STACK=$(STACK)
 	@$(MAKE) ec2_cluster_up STACK=$(STACK)
 	@$(MAKE) public_alb_up STACK=$(STACK)
 .PHONY: alb_all_infra_up
@@ -59,6 +59,14 @@ ci_cd_users_up:
 ci_cd_users_down:
 	@cd ./src/aws/eu-west-2/ci-cd-users && $(DOPPLER_CMD) pulumi up -s $(STACK)
 .PHONY: ci_cd_users_down
+
+doppler_role_up:
+	@cd ./src/aws/global/doppler-role && $(DOPPLER_CMD) pulumi up -s $(STACK)
+.PHONY: doppler_role_up
+
+doppler_role_down:
+	@cd ./src/aws/global/doppler-role && $(DOPPLER_CMD) pulumi up -s $(STACK)
+.PHONY: doppler_role_down
 
 users_up:
 	@cd ./src/aws/eu-west-2/users && $(DOPPLER_CMD) pulumi up -s $(STACK)

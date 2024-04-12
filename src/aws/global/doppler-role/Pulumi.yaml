@@ -1,0 +1,5 @@
+name: main-app-eu-west-2-doppler-role
+runtime: nodejs
+description: Global secrets access doppler role
+config:
+  aws:region: eu-west-2

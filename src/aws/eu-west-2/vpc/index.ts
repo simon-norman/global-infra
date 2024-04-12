@@ -7,7 +7,17 @@ const awsRegion = awsConfig.require("region");
 const config = new pulumi.Config();
 const environment = config.require("environment");
 
-const vpc = new aws.Vpc({ region: awsRegion, name: "main-app", environment });
+const httpsCertificateRef = new pulumi.StackReference(
+	`simon-norman/main-app-eu-west-2-https-certificate/${environment}`,
+);
+const httpsCertificateArn = httpsCertificateRef.getOutput("arn");
+
+const vpc = new aws.Vpc({
+	region: awsRegion,
+	name: "main-app",
+	environment,
+	serverCertificateArn: httpsCertificateArn,
+});
 
 export const vpcId = vpc.vpc.vpcId;
 export const urn = vpc.vpc.urn;
