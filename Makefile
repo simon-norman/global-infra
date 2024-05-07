@@ -57,7 +57,7 @@ ci_cd_users_up:
 .PHONY: ci_cd_users_up
 
 ci_cd_users_down:
-	@cd ./src/aws/eu-west-2/ci-cd-users && $(DOPPLER_CMD) pulumi up -s $(STACK)
+	@cd ./src/aws/eu-west-2/ci-cd-users && $(DOPPLER_CMD) pulumi down -s $(STACK)
 .PHONY: ci_cd_users_down
 
 doppler_role_up:
@@ -65,19 +65,27 @@ doppler_role_up:
 .PHONY: doppler_role_up
 
 doppler_role_down:
-	@cd ./src/aws/global/doppler-role && $(DOPPLER_CMD) pulumi up -s $(STACK)
+	@cd ./src/aws/global/doppler-role && $(DOPPLER_CMD) pulumi down -s $(STACK)
 .PHONY: doppler_role_down
+
+db_up:
+	@cd ./src/aws/eu-west-2/database && $(DOPPLER_CMD) pulumi up -s $(STACK)
+.PHONY: db_up
+
+db_down:
+	@cd ./src/aws/eu-west-2/database && $(DOPPLER_CMD) pulumi down -s $(STACK)
+.PHONY: db_down
 
 users_up:
 	@cd ./src/aws/eu-west-2/users && $(DOPPLER_CMD) pulumi up -s $(STACK)
 .PHONY: users_up
 
 users_down:
-	@cd ./src/aws/eu-west-2/users && $(DOPPLER_CMD) pulumi up -s $(STACK)
+	@cd ./src/aws/eu-west-2/users && $(DOPPLER_CMD) pulumi down -s $(STACK)
 .PHONY: users_down
 
 vpc_up:
-	@cd ./src/aws/eu-west-2/vpc && $(DOPPLER_CMD) pulumi up -f -s $(STACK)
+	@cd ./src/aws/eu-west-2/vpc && $(DOPPLER_CMD) pulumi up -s $(STACK)
 .PHONY: vpc_up
 
 vpc_down:
