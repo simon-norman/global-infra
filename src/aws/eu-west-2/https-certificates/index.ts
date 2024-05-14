@@ -1,5 +1,6 @@
-import { aws } from "@breeze32/shared-infra";
+import { aws, helpers } from "@breeze32/shared-infra";
 import * as pulumi from "@pulumi/pulumi";
+import { productName } from "src/helpers/references";
 
 const awsConfig = new pulumi.Config("aws");
 const awsRegion = awsConfig.require("region");
@@ -7,9 +8,12 @@ const awsRegion = awsConfig.require("region");
 const config = new pulumi.Config();
 const environment = config.require("environment");
 
-const environmentHostedZoneRef = new pulumi.StackReference(
-	`simon-norman/main-app-eu-west-2-environment-hosted-zone/${environment}`,
-);
+const environmentHostedZoneRef = helpers.getStackRef({
+	environment,
+	name: "environment-hosted-zone",
+	region: awsRegion,
+	productName,
+});
 
 const environmentHostedZoneId = environmentHostedZoneRef.getOutput("zoneId");
 

@@ -1,5 +1,6 @@
-import { aws } from "@breeze32/shared-infra";
+import { aws, helpers } from "@breeze32/shared-infra";
 import * as pulumi from "@pulumi/pulumi";
+import { productName } from "src/helpers/references";
 
 const awsConfig = new pulumi.Config("aws");
 const awsRegion = awsConfig.require("region");
@@ -7,22 +8,31 @@ const awsRegion = awsConfig.require("region");
 const config = new pulumi.Config();
 const environment = config.require("environment");
 
-const vpcStackRef = new pulumi.StackReference(
-	`simon-norman/main-app-eu-west-2-vpc/${environment}`,
-);
+const vpcStackRef = helpers.getStackRef({
+	environment,
+	name: "vpc",
+	region: awsRegion,
+	productName,
+});
 
 const publicSubnetIds = vpcStackRef.getOutput("publicSubnetIds");
 
-const securityGroupsRef = new pulumi.StackReference(
-	`simon-norman/main-app-eu-west-2-security-groups/${environment}`,
-);
+const securityGroupsRef = helpers.getStackRef({
+	environment,
+	name: "security-groups",
+	region: awsRegion,
+	productName,
+});
 const securityGroup = securityGroupsRef.getOutput(
 	"inboundPublicTlsOutboundAll",
 );
 
-const httpsCertificateRef = new pulumi.StackReference(
-	`simon-norman/main-app-eu-west-2-https-certificate/${environment}`,
-);
+const httpsCertificateRef = helpers.getStackRef({
+	environment,
+	name: "https-certificate",
+	region: awsRegion,
+	productName,
+});
 
 const certificateArn = httpsCertificateRef.getOutput("arn");
 
