@@ -1,7 +1,7 @@
 import { helpers } from "@breeze32/shared-infra";
 import { aws } from "@breeze32/shared-infra";
 import * as pulumi from "@pulumi/pulumi";
-import { productName } from "src/helpers/references";
+import { productName } from "../../../helpers/references";
 
 const awsConfig = new pulumi.Config("aws");
 const awsRegion = awsConfig.require("region");
@@ -35,6 +35,13 @@ const inboundFromAlbSecurityGroupOutboundAll =
 		sourceSecurityGroupId: inboundPublicTlsOutbound.securityGroup.id,
 	});
 
+const inboundNoneOutboundAll = new aws.SecurityGroupInboundNoneOutboundAll({
+	region: awsRegion,
+	name: "main-app-inbound-none-outbound-all",
+	environment,
+	vpcId,
+});
+
 type Group = typeof inboundPublicTlsOutbound.securityGroup;
 
 const getGroupOutputs = (group: Group) => {
@@ -51,4 +58,8 @@ export const inboundPublicTlsOutboundAll = getGroupOutputs(
 
 export const inboundAlbSecurityGroupOutboundAll = getGroupOutputs(
 	inboundFromAlbSecurityGroupOutboundAll.securityGroup,
+);
+
+export const inboundNoneSecurityGroupOutboundAll = getGroupOutputs(
+	inboundNoneOutboundAll.securityGroup,
 );

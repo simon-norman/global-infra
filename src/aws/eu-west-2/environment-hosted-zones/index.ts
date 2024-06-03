@@ -1,6 +1,6 @@
 import { aws, helpers } from "@breeze32/shared-infra";
 import * as pulumi from "@pulumi/pulumi";
-import { productName } from "src/helpers/references";
+import { productName } from "../../../helpers/references";
 
 const awsConfig = new pulumi.Config("aws");
 const awsRegion = awsConfig.require("region");
@@ -9,7 +9,7 @@ const config = new pulumi.Config();
 const environment = config.require("environment");
 
 const masterHostedZoneRef = helpers.getStackRef({
-	environment,
+	environment: "master",
 	name: "master-hosted-zone",
 	region: awsRegion,
 	productName,

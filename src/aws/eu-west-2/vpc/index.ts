@@ -11,6 +11,7 @@ const vpc = new aws.Vpc({
 	region: awsRegion,
 	name: "main-app",
 	environment,
+	allowDnsResolution: true,
 	// vpn: {
 	//   samlVpnEndpointServerCertificateArn:
 	// 	"arn:aws:acm:eu-west-2:211125444328:certificate/cad5b32a-3e39-47c0-8422-0c6408c53c6d",
