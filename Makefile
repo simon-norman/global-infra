@@ -2,8 +2,8 @@ DOPPLER_CMD := doppler run --
 
 
 aws_all_infra_up:
-	# @$(MAKE) environment_zones_up STACK=$(STACK)
-	# @$(MAKE) https_certificate_up STACK=$(STACK)
+	@$(MAKE) environment_zones_up STACK=$(STACK)
+	@$(MAKE) https_certificate_up STACK=$(STACK)
 	@$(MAKE) vpc_up STACK=$(STACK)
 	@$(MAKE) security_groups_up STACK=$(STACK)
 	@$(MAKE) ec2_cluster_up STACK=$(STACK)
@@ -18,6 +18,14 @@ aws_all_infra_down:
 	@$(MAKE) security_groups_down STACK=$(STACK)
 	@$(MAKE) vpc_down STACK=$(STACK)
 .PHONY: aws_all_infra_down
+
+
+aws_lambda_only_infra_up:
+	@$(MAKE) environment_zones_up STACK=$(STACK)
+	@$(MAKE) https_certificate_up STACK=$(STACK)
+	@$(MAKE) vpc_up STACK=$(STACK)
+	@$(MAKE) security_groups_up STACK=$(STACK)
+.PHONY: aws_lambda_only_infra_up
 
 
 https_certificate_up:
