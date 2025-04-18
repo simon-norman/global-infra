@@ -1,0 +1,4 @@
+name: 'dev-1'
+config:
+  datadog-secret-arn: "arn:aws:secretsmanager:eu-west-2:211125444328:secret:datadog-api-key-R0BUcZ"
+  environment: "dev-1"

@@ -1,5 +1,9 @@
 DOPPLER_CMD := doppler run --
 
+update-internal:
+	pnpm update "@breeze32/*" --latest
+.PHONY: update-internal-packages
+
 
 aws_all_infra_up:
 	@$(MAKE) environment_zones_up STACK=$(STACK)
@@ -116,6 +120,14 @@ ec2_cluster_down:
 	@cd ./src/aws/eu-west-2/ec2-cluster && $(DOPPLER_CMD) pulumi down -r -s $(STACK)
 .PHONY: ec2_cluster_down
 
+postgres_rds_datadog_agent_up:
+	@cd ./src/aws/eu-west-2/postgres-rds-datadog-agent && $(DOPPLER_CMD) pulumi up -r -f -s $(STACK)
+.PHONY: postgres_rds_datadog_agent_up
+
+postgres_rds_datadog_agent_down:
+	@cd ./src/aws/eu-west-2/postgres-rds-datadog-agent && $(DOPPLER_CMD) pulumi down -r -s $(STACK)
+.PHONY: postgres_rds_datadog_agent_down
+
 base_64_encode:
 	base64 -i $(INPUT_FILE) -o encoded_base64.txt
 .PHONY: base_64_encode
@@ -129,3 +141,10 @@ keybase_decrypt:
 	echo $(INPUT) | base64 --decode | keybase pgp decrypt
 .PHONY: base_64_encode
 
+fusion_auth_up:
+	@cd ./src/fusion-auth/eu-west-2 && $(DOPPLER_CMD) pulumi up -r -s $(STACK)
+.PHONY: fusion_auth_up
+
+fusion_auth_down:
+	@cd ./src/fusion-auth/eu-west-2 && $(DOPPLER_CMD) pulumi down -r -s $(STACK)
+.PHONY: fusion_auth_down

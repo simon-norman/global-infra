@@ -1,0 +1,5 @@
+name: main-app-eu-west-2-fusion-auth
+runtime: nodejs
+description: Main app eu west 2 fusion auth instance
+config:
+  aws:region: eu-west-2

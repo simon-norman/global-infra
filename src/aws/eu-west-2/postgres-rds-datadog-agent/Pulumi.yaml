@@ -1,0 +1,5 @@
+name: main-app-eu-west-2-postgres-rds-datadog-agent
+runtime: nodejs
+description: Main app eu west 2 postgres rds datadog agent
+config:
+  aws:region: eu-west-2

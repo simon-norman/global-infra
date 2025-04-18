@@ -12,7 +12,7 @@
 		"typescript": "^5.3.3"
 	},
 	"dependencies": {
-		"@breeze32/shared-infra": "^1.0.3",
+		"@breeze32/shared-infra": "^1.0.44",
 		"@pulumi/pulumi": "3.104.2",
 		"ts-node": "10.9.2"
 	}
