@@ -148,3 +148,20 @@ fusion_auth_up:
 fusion_auth_down:
 	@cd ./src/fusion-auth/eu-west-2 && $(DOPPLER_CMD) pulumi down -r -s $(STACK)
 .PHONY: fusion_auth_down
+
+install:
+	pnpm install
+.PHONY: install
+
+publish:
+	git add .
+	git commit -m $(COMMIT)
+	pnpm version $(VERSION)
+	pnpm publish --access public
+.PHONY: publish
+
+push:
+	git add .
+	git commit -m $(COMMIT)
+	git push
+.PHONY: publish
