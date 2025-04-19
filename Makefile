@@ -154,8 +154,7 @@ install:
 .PHONY: install
 
 publish:
-	git add .
-	git commit -m $(COMMIT)
+	$(MAKE) push COMMIT=$(COMMIT)
 	pnpm version $(VERSION)
 	pnpm publish --access public
 .PHONY: publish
