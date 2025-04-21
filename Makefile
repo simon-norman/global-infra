@@ -154,7 +154,7 @@ install:
 .PHONY: install
 
 publish:
-	$(MAKE) push COMMIT=$(COMMIT)
+	-$(MAKE) push COMMIT=$(COMMIT)
 	pnpm version $(VERSION)
 	pnpm publish --access public
 .PHONY: publish
