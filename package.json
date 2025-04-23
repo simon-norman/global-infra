@@ -1,19 +1,22 @@
 {
-	"name": "Global infra",
-	"author": "Simon Norman",
-	"version": "1.0.0",
-	"license": "MIT",
-	"scripts": {
-		"make": "make"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^1.5.3",
-		"@types/bun": "^1.0.7",
-		"typescript": "^5.3.3"
-	},
-	"dependencies": {
-		"@breeze32/shared-infra": "^1.0.44",
-		"@pulumi/pulumi": "3.104.2",
-		"ts-node": "10.9.2"
-	}
+  "name": "Global infra",
+  "author": "Simon Norman",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "make": "make",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.5.3",
+    "@types/bun": "1.0.7",
+    "husky": "9.1.7",
+    "npm-package-json-lint": "8.0.0",
+    "typescript": "5.3.3"
+  },
+  "dependencies": {
+    "@breeze32/shared-infra": "1.0.52",
+    "@pulumi/pulumi": "3.104.2",
+    "ts-node": "10.9.2"
+  }
 }

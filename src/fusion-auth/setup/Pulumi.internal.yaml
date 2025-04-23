@@ -1,0 +1,3 @@
+name: 'internal'
+config:
+  environment: "internal"

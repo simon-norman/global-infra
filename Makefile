@@ -2,8 +2,11 @@ DOPPLER_CMD := doppler run --
 
 update-internal:
 	pnpm update "@breeze32/*" --latest
-.PHONY: update-internal-packages
+.PHONY: update-internal
 
+define get_doppler_config
+	$(shell echo $(STACK) | cut -d'-' -f1)
+endef
 
 aws_all_infra_up:
 	@$(MAKE) environment_zones_up STACK=$(STACK)
@@ -142,12 +145,20 @@ keybase_decrypt:
 .PHONY: base_64_encode
 
 fusion_auth_up:
-	@cd ./src/fusion-auth/eu-west-2 && $(DOPPLER_CMD) pulumi up -r -s $(STACK)
+	@cd ./src/fusion-auth/server/eu-west-2 && $(DOPPLER_CMD) pulumi up -r -s $(STACK)
 .PHONY: fusion_auth_up
 
 fusion_auth_down:
-	@cd ./src/fusion-auth/eu-west-2 && $(DOPPLER_CMD) pulumi down -r -s $(STACK)
+	@cd ./src/fusion-auth/server/eu-west-2 && $(DOPPLER_CMD) pulumi down -r -s $(STACK)
 .PHONY: fusion_auth_down
+
+fusion_auth_setup_up:
+	@cd ./src/fusion-auth/setup && $(DOPPLER_CMD) doppler run -p fusion-auth -c $(STACK) -- pulumi up -r -f -s $(STACK)
+.PHONY: fusion_auth_setup_up
+
+fusion_auth_setup_down:
+	@cd ./src/fusion-auth/setup && $(DOPPLER_CMD) doppler run -p fusion-auth -c $(STACK) -- pulumi down -r -f -s $(STACK)
+.PHONY: fusion_auth_setup_down
 
 install:
 	pnpm install
