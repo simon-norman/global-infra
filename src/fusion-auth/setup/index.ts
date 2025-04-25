@@ -23,6 +23,11 @@ new fusionAuth.FusionAuthComponent({
 			email: `mock-api-${environment.split("-"[0])}@${productName}.com`,
 			roles: ["locations-api:base"],
 		},
+		{
+			password: process.env.TEST_ENVIRONMENT_SETUP_CLIENT_SECRET as string,
+			email: `test-environment-${environment.split("-"[0])}@${productName}.com`,
+			roles: ["locations-api:base"],
+		},
 	],
 	roles: ["locations-api:base"],
 	applicationName: "main-new-app",
