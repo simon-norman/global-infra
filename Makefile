@@ -164,6 +164,10 @@ install:
 	pnpm install
 .PHONY: install
 
+install-beta:
+	pnpm install $(PACKAGE)@beta
+.PHONY: install-beta
+
 publish:
 	-$(MAKE) push COMMIT=$(COMMIT)
 	pnpm version $(VERSION)
@@ -173,7 +177,7 @@ publish:
 publish-beta:
 	-$(MAKE) push COMMIT=$(COMMIT)
 	pnpm version prerelease --preid=beta
-	pnpm publish --access public
+	pnpm publish --access public --tag beta
 .PHONY: publish-beta
 
 push:
